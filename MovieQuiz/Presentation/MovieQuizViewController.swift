@@ -8,6 +8,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         }
         let givenAnswer = false
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        noButton.isEnabled = false
     }
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else {
@@ -15,10 +16,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         }
         let givenAnswer = true
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        yesButton.isEnabled = false
     }
+    
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
+    
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
+
+    
     
     private var correctAnswers: Int = 0
     private var currentQuestionIndex: Int = 0
@@ -55,6 +63,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     private func showNextQuestionOrResults() {
         imageView.layer.borderWidth = 0
+        noButton.isEnabled = true
+        yesButton.isEnabled = true
         if currentQuestionIndex == questionsAmount - 1 {
             let text = correctAnswers == questionsAmount ?
             "Поздравляем, Вы ответили на 10 из 10!" :
@@ -73,6 +83,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         } else {
             currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
+            
+            noButton.isEnabled = true
+            yesButton.isEnabled = true
         }
     }
     // MARK: - Lifecycle
