@@ -16,6 +16,8 @@
 		AD5EE5DE284D7887003966EF /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5EE5DD284D7887003966EF /* UIColor+Extensions.swift */; };
 		AD77F5742857F8810062FB14 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77F5732857F8810062FB14 /* Date+Extensions.swift */; };
 		AD7AFA552836189F00399704 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7AFA542836189F00399704 /* Array+Extensions.swift */; };
+		E769C85729C71C2B004B2C78 /* AlertPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769C85629C71C2B004B2C78 /* AlertPresenterDelegate.swift */; };
+		E769C85929C72052004B2C78 /* AlertPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769C85829C72052004B2C78 /* AlertPresenterProtocol.swift */; };
 		E7966C4429C6ECAE0028FE10 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7966C4329C6ECAE0028FE10 /* AlertModel.swift */; };
 		E7966C4629C6ED4B0028FE10 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7966C4529C6ED4B0028FE10 /* AlertPresenter.swift */; };
 		E79C7B9C29C63B8200241444 /* QuestionFactoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79C7B9B29C63B8200241444 /* QuestionFactoryDelegate.swift */; };
@@ -40,6 +42,8 @@
 		AD5EE5DD284D7887003966EF /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		AD77F5732857F8810062FB14 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		AD7AFA542836189F00399704 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		E769C85629C71C2B004B2C78 /* AlertPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterDelegate.swift; sourceTree = "<group>"; };
+		E769C85829C72052004B2C78 /* AlertPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterProtocol.swift; sourceTree = "<group>"; };
 		E7966C4329C6ECAE0028FE10 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		E7966C4529C6ED4B0028FE10 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		E79C7B9B29C63B8200241444 /* QuestionFactoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFactoryDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				AD1ABAB52831907B00B3E448 /* MovieQuizViewController.swift */,
 				AD1ABAB72831907B00B3E448 /* Main.storyboard */,
 				E7966C4529C6ED4B0028FE10 /* AlertPresenter.swift */,
+				E769C85629C71C2B004B2C78 /* AlertPresenterDelegate.swift */,
+				E769C85829C72052004B2C78 /* AlertPresenterProtocol.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -260,12 +266,14 @@
 			files = (
 				AD5EE5DE284D7887003966EF /* UIColor+Extensions.swift in Sources */,
 				E7966C4629C6ED4B0028FE10 /* AlertPresenter.swift in Sources */,
+				E769C85729C71C2B004B2C78 /* AlertPresenterDelegate.swift in Sources */,
 				E7966C4429C6ECAE0028FE10 /* AlertModel.swift in Sources */,
 				AD7AFA552836189F00399704 /* Array+Extensions.swift in Sources */,
 				E7B435B929C450DF00CAFC97 /* QuestionFactoryProtocol.swift in Sources */,
 				E79C7B9C29C63B8200241444 /* QuestionFactoryDelegate.swift in Sources */,
 				AD1ABAB62831907B00B3E448 /* MovieQuizViewController.swift in Sources */,
 				E7DD4E2329C1DDE700E90BE7 /* QuizStepViewModel.swift in Sources */,
+				E769C85929C72052004B2C78 /* AlertPresenterProtocol.swift in Sources */,
 				E7DD4E2729C1DE4E00E90BE7 /* QuizQuestion.swift in Sources */,
 				E7DD4E2029C1DB7300E90BE7 /* QuestionFactory.swift in Sources */,
 				AD77F5742857F8810062FB14 /* Date+Extensions.swift in Sources */,
