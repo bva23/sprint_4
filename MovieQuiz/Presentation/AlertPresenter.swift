@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class AlertPresenter: AlertPresenterProtocol {
-    
     weak var delegate: AlertPresenterDelegate?
     init(delegate: AlertPresenterDelegate?) {
         self.delegate = delegate
