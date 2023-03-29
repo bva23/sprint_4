@@ -86,7 +86,7 @@ extension StatisticServiceImplementation: StatisticService {
             }
             set {
                 guard let data = try? JSONEncoder().encode(newValue) else {
-                    print("Невозможно сохранить результат")
+                    assertionFailure("Невозможно сохранить результат")
                     return
                 }
                 userDefaults.set(data, forKey: Keys.bestGame.rawValue)

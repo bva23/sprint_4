@@ -5,10 +5,9 @@
 //  Created by Владимир Богомолов on 19.03.2023.
 //
 
-import Foundation
 import UIKit
 
-class AlertPresenter: AlertPresenterProtocol {
+final class AlertPresenter: AlertPresenterProtocol {
     weak var delegate: AlertPresenterDelegate?
     init(delegate: AlertPresenterDelegate?) {
         self.delegate = delegate
