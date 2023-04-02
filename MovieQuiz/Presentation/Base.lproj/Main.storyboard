@@ -121,16 +121,22 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="t9u-qN-8ns">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bCW-z9-bTy" secondAttribute="trailing" constant="20" id="35P-0O-c5g"/>
+                            <constraint firstItem="t9u-qN-8ns" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Dg6-zC-rUW"/>
                             <constraint firstItem="bCW-z9-bTy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="X5L-kt-cnY"/>
                             <constraint firstItem="bCW-z9-bTy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="ZEP-9j-Myw"/>
+                            <constraint firstItem="t9u-qN-8ns" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m6O-Iv-R8L"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="t9u-qN-8ns" id="Bp5-LI-pNq"/>
                         <outlet property="counterLabel" destination="xM5-eR-4Vj" id="A7b-Ox-a6h"/>
                         <outlet property="imageView" destination="aZ2-yl-74b" id="Hzb-DW-Fgb"/>
                         <outlet property="noButton" destination="DOV-tI-ZHZ" id="YrT-4G-PiG"/>
