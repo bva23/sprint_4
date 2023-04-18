@@ -2,21 +2,16 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertPresenterDelegate {
     @IBAction private func noButtonClicked(_ sender: UIButton) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        let givenAnswer = false
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        presenter.noButtonClicked()
         noButton.isEnabled = false
-    }
-    @IBAction private func yesButtonClicked(_ sender: UIButton) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        let givenAnswer = true
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
         yesButton.isEnabled = false
     }
+    @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        presenter.yesButtonClicked()
+        noButton.isEnabled = false
+        yesButton.isEnabled = false
+    }
+
     @IBOutlet private var noButton: UIButton!
     @IBOutlet private var yesButton: UIButton!
     @IBOutlet private var imageView: UIImageView!
@@ -27,7 +22,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private var correctAnswers: Int = 0
     private var questionFactory: QuestionFactoryProtocol?
     private var alertPresenter: AlertPresenterProtocol?
-    private var currentQuestion: QuizQuestion?
+
     private var statisticService: StatisticService?
     private let presenter = MovieQuizPresenter()
 
@@ -39,7 +34,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private func show(quiz model: AlertModel) {
         alertPresenter?.showAlert(model: model)
     }
-    private func showAnswerResult(isCorrect: Bool) {
+    func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
             correctAnswers += 1
         }
@@ -132,7 +127,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        presenter.viewController = self
+        
         imageView.layer.cornerRadius = 20
 
         statisticService = StatisticServiceImplementation(
@@ -153,7 +149,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         guard let question = question else {
             return
         }
-        currentQuestion = question
+        presenter.currentQuestion = question
         let viewModel = presenter.convert(model: question)
         DispatchQueue.main.async { [weak self] in
             self?.show(quiz: viewModel)
