@@ -59,13 +59,11 @@ final class QuestionFactory: QuestionFactoryProtocol {
             } catch {
                 print("Failed to load image")
             }
-            
+
             let rating = Float(movie.rating) ?? 0
             let text = "Рейтинг этого фильма больше чем 7?"
             let correctAnswer = rating > 7
-            let question = QuizQuestion(image: imageData,
-                                        text: text,
-                                        correctAnswer: correctAnswer)
+            let question = QuizQuestion(image: imageData,text: text, correctAnswer: correctAnswer)
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -74,13 +72,3 @@ final class QuestionFactory: QuestionFactoryProtocol {
         }
     }
 }
-    /*
-    func requestNextQuestion() {
-        guard let index = (0..<questions.count).randomElement() else {
-            return
-        }
-        let question = questions[safe: index]
-        delegate?.didReceiveNextQuestion(question: question)
-    }
-*/
-
