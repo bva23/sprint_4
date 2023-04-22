@@ -7,20 +7,47 @@
 
 import UIKit
 
-final class MovieQuizPresenter {
+final class MovieQuizPresenter: QuestionFactoryDelegate {
+
     private var currentQuestionIndex: Int = 0
     let questionsAmount: Int = 10
+    var correctAnswers: Int = 0
     var currentQuestion: QuizQuestion?
     weak var viewController: MovieQuizViewController?
-    var correctAnswers: Int = 0
     var questionFactory: QuestionFactoryProtocol?
+
+    init(viewController: MovieQuizViewController) {
+        self.viewController = viewController
+    
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(networkClient: NetworkClient()), delegate: self)
+        questionFactory?.loadData()
+        viewController.showLoadingIndicator()
+    }
+
+    // MARK: - QuestionFactoryDelegate
+
+    func didLoadDataFromServer() {
+        viewController?.hideLoadingIndicator()
+        questionFactory?.requestNextQuestion()
+    }
+
+    func didFailToLoadData(with error: Error) {
+        let message = error.localizedDescription
+        viewController?.showNetworkError(message: message)
+    }
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        guard let question = question else {
+            return
+    }
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.show(quiz: viewModel)
+        }
+    }
 
     func isLastQuestion() -> Bool {
         currentQuestionIndex == questionsAmount - 1
-    }
-
-    func resetQuestionIndex() {
-        currentQuestionIndex = 0
     }
 
     func switchToNextQuestion() {
@@ -47,17 +74,6 @@ final class MovieQuizPresenter {
         viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
 
-    func didRecieveNextQuestion(question: QuizQuestion?) {
-        guard let question = question else {
-            return
-        }
-        currentQuestion = question
-        let viewModel = convert(model: question)
-        DispatchQueue.main.async { [weak self] in
-            self?.viewController?.show(quiz: viewModel)
-        }
-    }
-
     func showNextQuestionOrResults() {
         viewController?.imageView.layer.borderWidth = 0
         viewController?.noButton.isEnabled = true
@@ -67,7 +83,7 @@ final class MovieQuizPresenter {
             showFinalResults()
         } else {
             self.switchToNextQuestion()
-            viewController?.questionFactory?.requestNextQuestion()
+            questionFactory?.requestNextQuestion()
             viewController?.noButton.isEnabled = true
             viewController?.yesButton.isEnabled = true
         }
@@ -97,10 +113,20 @@ final class MovieQuizPresenter {
             title: "Этот раунд окончен!",
             message: text,
             buttonText: "Сыграть ещё раз") { [weak self] in
-                self?.correctAnswers = 0
-                self?.resetQuestionIndex()
-                self?.viewController?.questionFactory?.requestNextQuestion()
+                self?.restartGame()
         }
         viewController?.show(quiz: alertModel)
+    }
+
+    func didAnswer(isCorrect: Bool) {
+        if isCorrect {
+            correctAnswers += 1
+        }
+    }
+
+    func restartGame() {
+        currentQuestionIndex = 0
+        correctAnswers = 0
+        questionFactory?.requestNextQuestion()
     }
 }
